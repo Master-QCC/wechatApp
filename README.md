@@ -1,1 +1,1 @@
-#qcc-wechat
+#wechat-vue
