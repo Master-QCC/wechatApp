@@ -124,7 +124,4 @@
 		background-color: white;
 		border-bottom: 1px solid #ddd;
 	}
-	.clear{
-		clear: both;
-	}
 </style>

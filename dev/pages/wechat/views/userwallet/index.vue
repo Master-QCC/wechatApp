@@ -8,7 +8,6 @@
 					<p>{{pay.word}}</p>
 					<span>{{pay.num}}</span>
 				</div>
-				<div class="clear"></div>
 			</div>
 			<div class="servebox">
 				<p class="servetitle">腾讯服务</p>
@@ -151,6 +150,15 @@
 			}
 		}
 	}
+	.paybox::after,
+	.servebox::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
 	.payicon{
 		display: block;
 		width: 0.3rem;
@@ -167,9 +175,6 @@
 		margin: 0 auto;
 		zoom: 2;
 		margin-bottom: .1rem;
-	}
-	.clear{
-		clear: both;
 	}
 	.servebox{
 		background-color: white;
@@ -189,12 +194,5 @@
 				text-align: center;
 			}
 		}
-	}
-	.servebox::after{
-		display:block; 
-		content:"clear";
-		height:0; 
-		clear:both;
-		overflow:hidden; 
 	}
 </style>

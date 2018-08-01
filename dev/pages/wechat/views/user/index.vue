@@ -15,7 +15,6 @@
 						<Icon class="icon" type="ios-barcode-outline"></Icon>
 						<Icon class="icon" type="ios-arrow-forward"></Icon>
 					</div>
-					<div class="clear"></div>
 				</router-link>
 				<router-link class="listbox" tag="div" :to="`/userwatch`">
 					<Icon class="icon" type="android-watch"></Icon>
@@ -82,12 +81,8 @@
 		padding-left: 0.1rem;
 		border-bottom: 1px solid #ddd;
 	}
-	.userinfo:nth-child(2){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(3){
-		margin-top: 0.2rem;
-	}
+	.userinfo:nth-child(2),
+	.userinfo:nth-child(3),
 	.userinfo:nth-child(7){
 		margin-top: 0.2rem;
 	}
@@ -127,6 +122,15 @@
 		height: 0.6rem;
 		float: right;
 	}
+	.iconbox::after,
+	.wrapboder::after{
+		content: "";
+		clear: both;
+		visibility: hidden;
+		zoom: 1;
+		display: block;
+		height: 0;
+	}
 	.icon{
 		width: 0.22rem;
 		height: 0.22rem;
@@ -144,8 +148,5 @@
 		.icon2{
 			float: right;
 		}
-	}
-	.clear{
-		clear: both;
 	}
 </style>

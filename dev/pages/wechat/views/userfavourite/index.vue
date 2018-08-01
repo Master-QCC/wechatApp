@@ -6,11 +6,10 @@
 				<Input class="sinput" placeholder="搜索"></Input>
 			</div>
 			<div class="kinds">
-				<ul>
+				<ul class="kindlist">
 					<li v-for="(kind,index) in kinds" :key="index">
 						{{kind.word}}
 					</li>
-					<div class="clear"></div>
 				</ul>
 			</div>
 			<div class="favevents">
@@ -21,7 +20,6 @@
 					<div class="titlebox">
 						<p class="eventtitle">{{event.title}}</p>
 					</div>
-					<div class="clear"></div>
 					<div class="utbox">
 						<p>{{event.username}}</p>
 						<p>{{formatDate(event.time)}}</p>
@@ -198,6 +196,15 @@
 			}
 		}
 	}
+	.kindlist::after,
+	.faveventsbox::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
 	.favevents{
 		border-radius: 0.06rem;
 		.faveventsbox{
@@ -236,8 +243,5 @@
 				color: #999;
 			}
 		}
-	}
-	.clear{
-		clear: both;
 	}
 </style>

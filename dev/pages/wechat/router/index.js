@@ -18,6 +18,7 @@ import Find from '../views/find'
 import Usersetting from '../views/usersetting'
 import Usercard from '../views/usercard'
 import Userphoto from '../views/userphoto'
+import Useremoji from '../views/useremoji'
 
 Vue.use(Router);
 
@@ -69,6 +70,10 @@ const staticRouter = [{
   path: '/userphoto',
   name: 'Userphoto',
   component: Userphoto,
+},{
+  path: '/useremoji',
+  name: 'Useremoji',
+  component: Useremoji,
 }]
 
 const router = new Router({

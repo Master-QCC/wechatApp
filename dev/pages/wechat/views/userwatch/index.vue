@@ -6,15 +6,15 @@
 				<img :src="watchurl" alt="手表图表">
 			</div>
 			<div class="watchtext">
-				<p>设置微信表盘</p>
+				<p>{{wtext1}}</p>
 				<ol>
-					<li>用力按压Apple Watch显示屏，选择<b>模块</b>表盘</li>
-					<li>轻触 自定</li>
-					<li>向左轻扫，轻触选择某个功能栏</li>
-					<li>转动Digital Crown选择 微信</li>
+					<li>{{wtext21}}<b>{{wtext22}}</b>{{wtext23}}</li>
+					<li>{{wtext3}}</li>
+					<li>{{wtext4}}</li>
+					<li>{{wtext5}}</li>
 				</ol>
-				<p>为了即时启动微信，提供最新资讯，你可以将微信添加到Dock。</p>
-				<a>了解更多</a>
+				<p>{{wtext6}}</p>
+				<a>{{wtext7}}</a>
 			</div>
 			<div class="watchbtn" v-for="(watch,index) in watchs" :key="index">
 				<p>{{watch.message}}</p>
@@ -41,6 +41,15 @@
 				out:'我',
 				bu:'/user',
 				watchurl:require('@/assets/images/watchimg.png'),
+				wtext1:'设置微信表盘',
+				wtext21:'用力按压Apple Watch显示屏，选择',
+				wtext22:'模块',
+				wtext23:'表盘',
+				wtext3:'轻触 自定',
+				wtext4:'向左轻扫，轻触选择某个功能栏',
+				wtext5:'转动Digital Crown选择 微信',
+				wtext6:'为了即时启动微信，提供最新资讯，你可以将微信添加到Dock。',
+				wtext7:'了解更多',
 				watchs:[{
 					message: 'Watch 回复技巧'
 				},

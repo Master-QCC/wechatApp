@@ -79,18 +79,10 @@
 		padding-left: 0.1rem;
 		border-bottom: 1px solid #ddd;
 	}
-	.userinfo:nth-child(2){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(4){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(6){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(7){
-		margin-top: 0.2rem;
-	}
+	.userinfo:nth-child(2),
+	.userinfo:nth-child(4),
+	.userinfo:nth-child(6),
+	.userinfo:nth-child(7),
 	.userinfo:nth-child(8){
 		margin-top: 0.2rem;
 	}

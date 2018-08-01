@@ -10,7 +10,7 @@
 					<p class="wordr">{{item.wordr}}</p>
 				</div>
 			</div>
-			<div class="btninfo" v-for="(btn,index) in btns" :key="index">
+			<div class="btninfo" v-for="btn in btns" :key="btn.id">
 				{{btn.text}}
 			</div>
 		</div>
@@ -91,13 +91,10 @@
 		padding-left: 0.1rem;
 		border-bottom: 1px solid #ddd;
 	}
-	.userinfo:nth-child(2){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(5){
-		margin-top: 0.2rem;
-	}
-	.userinfo:nth-child(7){
+	.userinfo:nth-child(2),
+	.userinfo:nth-child(5),
+	.userinfo:nth-child(7)
+	{
 		margin-top: 0.2rem;
 	}
 	.wrapboder{
@@ -125,9 +122,6 @@
 	.wordr{
 		float: right;
 		margin-right: .1rem;
-	}
-	.clear{
-		clear: both;
 	}
 	.btninfo{
 		background-color: white;

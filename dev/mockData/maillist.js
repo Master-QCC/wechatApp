@@ -359,6 +359,38 @@ let friendList = {
     {
       fname: '!@$#^',
       fpic: require('@/assets/images/tx1.jpg')
+    },
+    {
+      fname: '%%%cc',
+      fpic: require('@/assets/images/tx1.jpg')
+    },
+    {
+      fname: '&&%%',
+      fpic: require('@/assets/images/tx2.jpg')
+		},
+		{
+      fname: '+_+__',
+      fpic: require('@/assets/images/tx1.jpg')
+    },
+    {
+      fname: '>.<',
+      fpic: require('@/assets/images/tx2.jpg')
+    },
+    {
+      fname: '":":"',
+      fpic: require('@/assets/images/tx1.jpg')
+    },
+    {
+      fname: '{}{}{}}',
+      fpic: require('@/assets/images/tx2.jpg')
+		},
+		{
+      fname: '!@#$%^',
+      fpic: require('@/assets/images/tx1.jpg')
+    },
+    {
+      fname: '+_)(*&',
+      fpic: require('@/assets/images/tx2.jpg')
     }
   ],
 };

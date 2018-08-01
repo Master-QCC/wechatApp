@@ -13,7 +13,6 @@
 					<div class="imgbox">
 						<img :src="txurl"/>
 					</div>
-					<div class="clear"></div>
 				</router-link>
 				<div class="listbox" v-for="(item,index) in items" :key='index'>
 					<p>{{item.infomsg}}</p>
@@ -108,6 +107,14 @@
 		border-bottom: 1px solid #ddd;
 		background-color: white;
 	}
+	.wrapboder::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
 	.textbox{
 		padding-top: 0.06rem;
 		float: left;
@@ -157,8 +164,5 @@
 	.usmargin{
 		margin-top: .2rem;
 		margin-bottom: .2rem;
-	}
-	.clear{
-		clear: both;
 	}
 </style>

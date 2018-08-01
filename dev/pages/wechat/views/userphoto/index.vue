@@ -11,21 +11,20 @@
     <div class="wrapcontent">
 	  	<div class="photobg" :style="photobg"></div>
 			<div class="userinfo">
-				<div class="imgbox"><img :src="txsrc" alt="头像照片"></div>
-				<p>{{username}}</p>
-				<div class="clear"></div>
+				<div class="userimgp">
+					<div class="imgbox"><img :src="txsrc" alt="头像照片"></div>
+					<p>{{username}}</p>
+				</div>
 				<span>{{autograph}}</span>
 			</div>
 			<div class="photoitem">
 				<p class="day">{{now}}</p>
 				<img :src="nowsrc" alt="相机开关">
-				<div class="clear"></div>
 			</div>
 			<div class="photoitem" v-for="(photo,index) in photos" :key="index">
 				<p class="day">{{photo.day}}<i>{{photo.month}}</i></p>
-				<img :src="photo.psrc" alt="相机开关">
+				<img :src="photo.psrc" alt="用户照片">
 				<div class="text">{{photo.text}}</div>
-				<div class="clear"></div>
 			</div>
 		</div>
   </div>
@@ -140,6 +139,15 @@
 		height: 3rem;
 		margin-bottom: .8rem;
 	}
+	.photoitem::after,
+	.userimgp::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
 	.userinfo{
 		position: absolute;
 		top: 2.6rem;
@@ -200,8 +208,5 @@
 			white-space:nowrap;
 			text-overflow:ellipsis;
 		}
-	}
-	.clear{
-		clear: both;
 	}
 </style>

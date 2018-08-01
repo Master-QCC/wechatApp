@@ -6,7 +6,7 @@
   		<Input class="sinput" icon="mic-a" placeholder="搜索"></Input>
   	</div>
   	<div class="wrapcontent">
-	  	<div ref='defaultinfo' class="defaultinfo" v-for="(def,index) in defs" :key="index">
+	  	<div ref='defaultinfo' class="defaultinfo" v-for="def in defs" :key="def.id">
 			<div class="listbox">
 				<img :src="def.src" alt="图标">
 				<p>{{def.word}}</p>
@@ -19,7 +19,6 @@
 					<div class="listbox">
 						<img :src="value.fpic" alt="头像">
 						<p>{{value.fname}}</p>
-						<div class="clear"></div>
 					</div>	
 				</div>
 			</div>
@@ -92,32 +91,49 @@
 				return value
 			},
 			scrollTop: function(newValue,oldValue) {
+				if(newValue < this.$refs.friendbox[0].offsetTop + 42) {
+					this.$refs.fixbox.display = false
+					this.fixword = ""
+					this.$refs.words[0].style.color = "#495060"
+					this.$refs.words[0].style.backgroundColor = "transparent"
+				}
 				if(newValue >= this.$refs.friendbox[0].offsetTop + 42 && newValue < this.$refs.friendbox[0].offsetTop + 42 + this.$refs.friendbox[0].offsetHeight) {
 					this.$refs.fixbox.display = true
 					this.fixword = this.$refs.fnumbox[0].innerText
+					this.$refs.words[0].style.color = "white"
+					this.$refs.words[0].style.backgroundColor = "#52A936"
+					this.$refs.words[1].style.color = "#495060"
+						this.$refs.words[1].style.backgroundColor = "transparent"
 				}
-				else if(newValue >= this.$refs.friendbox[1].offsetTop + 42 && newValue < this.$refs.friendbox[1].offsetTop + 42 + this.$refs.friendbox[1].offsetHeight) {
+				for(let i = 1;i<26;i++){
+					if(newValue >= this.$refs.friendbox[i].offsetTop + 42 && newValue < this.$refs.friendbox[i].offsetTop + 42 + this.$refs.friendbox[i].offsetHeight) {
+						this.$refs.fixbox.display = true
+						this.fixword = this.$refs.fnumbox[i].innerText
+						this.$refs.words[i-1].style.color = "#495060"
+						this.$refs.words[i-1].style.backgroundColor = "transparent"
+						this.$refs.words[i+1].style.color = "#495060"
+						this.$refs.words[i+1].style.backgroundColor = "transparent"
+						this.$refs.words[i].style.color = "white"
+						this.$refs.words[i].style.backgroundColor = "#52A936"
+					}
+				}
+				if(newValue >= this.$refs.friendbox[26].offsetTop + 42 && newValue < this.$refs.friendbox[26].offsetTop + 42 + this.$refs.friendbox[26].offsetHeight) {
 					this.$refs.fixbox.display = true
-					this.fixword = this.$refs.fnumbox[1].innerText
+					this.fixword = this.$refs.fnumbox[26].innerText
+					this.$refs.words[25].style.color = "#495060"
+					this.$refs.words[25].style.backgroundColor = "transparent"
+					this.$refs.words[26].style.color = "white"
+					this.$refs.words[26].style.backgroundColor = "#52A936"
 				}
-				else if(newValue >= this.$refs.friendbox[2].offsetTop + 42 && newValue < this.$refs.friendbox[2].offsetTop + 42 + this.$refs.friendbox[2].offsetHeight) {
-					this.$refs.fixbox.display = true
-					this.fixword = this.$refs.fnumbox[2].innerText
-				}
-				else if(newValue >= this.$refs.friendbox[3].offsetTop + 42 && newValue < this.$refs.friendbox[3].offsetTop + 42 + this.$refs.friendbox[3].offsetHeight) {
-					this.$refs.fixbox.display = true
-					this.fixword = this.$refs.fnumbox[3].innerText
-				}else{
-					this.$refs.fixbox.display = false
-					this.fixword = ""
-				}
-				console.log(this.$refs.fnumbox[0].innerText,5555)
-				console.log(oldValue,"oldddddd")
-				console.log(newValue,"newwwwww")
+				console.log(this.$refs.words[0],333)
 			}
 		},
 		methods:{
 			top(val){
+				for(let i = 1;i<26;i++){
+						this.$refs.words[i].style.color = "#495060"
+						this.$refs.words[i].style.backgroundColor = "transparent"
+				}
 				this.current = val
 				// this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 				document.documentElement.scrollTop = this.$refs.friendbox[val].offsetTop + 42
@@ -198,6 +214,14 @@
 			vertical-align:middle;
 		}
 	}
+	.listbox::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
 	.friends{
 		padding-left: 0.1rem;
 		width: 100%;
@@ -222,9 +246,6 @@
 				border-radius: 100%;
 			}
 		}
-	}
-	.clear{
-		clear:both;
 	}
 	.show{
 		display: block;

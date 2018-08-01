@@ -6,12 +6,10 @@
             <div class="textbox">
                 <div class="imgbox"><img :src="txurl" alt="头像"></div>
                 <div class="text">{{ccontent}}</div>
-                <div class="clear"></div>
             </div>
             <div class="textbox2" v-if="seen" v-for="(item,index) in items" :key="index">
                 <div class="imgbox"><img :src="item.mytx" alt="头像"></div>
                 <div ref="inputtext" class="text">{{item.inputmessage}}</div>
-                <div class="clear"></div>
             </div>
         </div>
         <div class="chatfooter">
@@ -134,6 +132,14 @@ export default {
             border-bottom: 0.06rem solid transparent;
         }
     }
+    .textbox::after,.textbox2::after{
+        clear: both;
+        content: "";
+        visibility: hidden;
+        height: 0;
+        display: block;
+        zoom: 1;
+    }
     .textbox2{
         width: 100%;
         margin-bottom: 0.1rem;
@@ -173,9 +179,6 @@ export default {
             border-top: 0.06rem solid transparent;
             border-bottom: 0.06rem solid transparent;
         }
-    }
-    .clear{
-        clear: both;
     }
     .chatfooter {
 		position: fixed;
