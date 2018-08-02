@@ -2,9 +2,11 @@
   <div class="useremoji">
   	<div class="emojihead">
 			<div class="top">
+				<router-link tag="div" :to="`/useremoji`" class="jxbq tbq">{{jxbq}}</router-link>
+				<router-link tag="div" :to="`/useremoji2`" class="gdbq tbq">{{gdbq}}</router-link>
 			</div>
-			<router-link :to="`/user`">
-			<div class="backbtn"><Icon class="iback" type="chevron-left"></Icon>我</div>
+			<router-link class="backbtn" tag="div" :to="`/user`">
+				<Icon class="iback" type="chevron-left"></Icon>我
 			</router-link>
 			<div class="plus">
 				<Icon class="icon" type="gear-a"></Icon>
@@ -14,23 +16,45 @@
   		<Input class="sinput" placeholder="搜索"></Input>
   	</div>
   	<div ref="bannerbox" class="banner">
-			<img v-for="pic in pics" :src="pic.imgurl" alt="轮播图" :key="pic.id">
+			<transition-group tag='ul' class="bannerlist" name='image'>
+				<li ref="bannerpic" v-for="(pic,index) in pics" v-show='index===mark' :key="index">
+					<img :src="pic.imgurl" alt="banner图" >
+				</li>
+			</transition-group>
 		</div>
-		
+		<div class="wrapemoji" v-for="(wemoji,key) in wemojis" :key="wemoji.id">
+			<div class="emojitext">{{key}}</div>
+			<div class="emojiitem" v-for="value in wemoji" :key="value.id">
+				<img :src="value.epic" alt="表情图片">
+				<div class="emojiname">
+					<p class="ename">{{value.name}}</p>
+					<p class="edescribe">{{value.describe}}</p>
+				</div>
+				<Button type="success" ghost>{{download}}</Button>
+			</div>
+		</div>
   </div>
 </template>
 
 <script>
-	import {Icon,Input} from 'iview'
+	import {Icon,Input,Button} from 'iview'
+	import list from '@/mockData/emojilist.js'
 	
 	export default{
 		name: 'useremoji',
 		components: {
-	      Icon,
+				Icon,
+				Button,
 	      Input
 	    },
 		data(){
 			return{
+				jxbq:"精选表情",
+				gdbq:"更多表情",
+				wemojis:list,
+				mark:0,
+				timer: null,
+				download:"下载",
 				pics:[{
 					imgurl:require('@/assets/images/emojibanner1.png')
 				},{
@@ -43,19 +67,31 @@
 			}
 		},
 		methods:{
-			width(){
-			 this.$refs.bannerbox.style.width = this.pics.length * this.$el.clientWidth + 'px'
-			console.log(this.pics.length * this.$el.clientWidth + 'px',999)
+			autoplay(){
+				this.mark++
+				if(this.mark === 4){
+					this.mark = 0
+					return
+				}
+			},
+			play(){
+				setInterval(this.autoplay,3000)
 			}
 		},
 		mounted(){
-			this.width()
+			this.play()
 		}
 	}
 </script>
 
 <style lang="less" scoped>
-.emojihead {
+	.useremoji{
+		position:relative;
+		top:.8rem;
+		max-width: 100vw;
+		overflow: hidden;
+	}
+	.emojihead {
 		position: fixed;
 		top: 0;
 		width: 100%;
@@ -63,6 +99,30 @@
 		background-color: #49494B;
 		padding: 0.1rem 0.2rem 0.2rem 0.2rem;
 		z-index: 99;
+		.top{
+			position: absolute;
+			bottom: 0.1rem;
+			left: 50%;
+			margin-left: -.8rem;
+			width: 1.6rem;
+			display: flex;
+			border-radius: .06rem;
+			border: .01rem solid white;
+			overflow: hidden;
+			.tbq{
+				width: 50%;
+				padding: .05rem .1rem;
+				text-align: center;
+			}
+			.jxbq{
+				background-color: white;
+				color: #49494B;
+			} 
+			.gdbq{
+				color: white;
+				background-color: #49494B;
+			} 
+		}
 		.title {
 			position: absolute;
 			bottom: 0.1rem;
@@ -86,39 +146,28 @@
 			position: absolute;
 			bottom: 0.1rem;
 			color: white;
-			float: left;
+			left: 0.1rem;
 			.iback{
 				margin-right: 0.02rem;
 			}
 		}
 	}
-
 	.search{
-		position: relative;
-		top: 0.8rem;
 		width: 100%;
-		height: 0.44rem;
+		height: .44rem;
 		background-color: #EFEEF4;
-		padding: 0.07rem;
+		padding: .07rem;
 		border-bottom: 1px solid #ddd;
 		.sinput{
 			border: none;
-			border-radius: 0.08rem;
-			height: 0.3rem;
+			border-radius: .08rem;
+			height: .3rem;
 			width: 100%;
 			text-align: center;
 		}
 	}
 	.banner{
-		position: relative;
-    height: auto;
-    top: 0.8rem;
-		margin-bottom: 0.66rem;
-		img{
-			width: 100vw;
-			height: auto;
-			float: left;
-		}
+		height: 1.5rem;
 	}
 	.banner::after{
 		clear: both;
@@ -127,5 +176,71 @@
 		height: 0;
 		display: block;
 		zoom: 1;
+	}
+	.bannerlist{
+		position: relative;
+		width: 100vw;
+		left: 0;
+		li{
+			position: absolute;
+			img{
+				width: 100vw;
+			}
+		}
+	}
+	.bannerlist::after{
+		clear: both;
+		content: "";
+		visibility: hidden;
+		height: 0;
+		display: block;
+		zoom: 1;
+	}
+	.wrapemoji{
+		padding-left: .1rem;
+		.emojitext{
+			line-height: .5rem;
+			height: .5rem;
+			font-size: .16rem;
+			color: #000;
+			border-bottom: .01rem solid #F2F2F2; 
+		}
+	}
+	.emojiitem{
+		display: flex;
+		padding: .1rem;
+		padding-left: 0;
+		align-items:center;
+		border-bottom: .01rem solid #ddd; 
+		img{
+			width: .7rem;
+			height: .6rem;
+			margin-right: .1rem;
+		}
+		.emojiname{
+			flex: 1;
+			.ename{
+				font-size: .18rem;
+				color: #000;
+			}
+			.edescribe{
+				font-size: .14rem;
+				color: #8A8A8A;
+			}
+		}
+	}
+	.image-enter-active {
+		transform: translateX(0);
+		transition: all 1s ease;
+	}
+	.image-leave-active {
+		transform: translateX(-100%);
+		transition: all 1s ease;
+	}
+	.image-enter {
+		transform: translateX(100%);
+	}
+	.image-leave {
+		transform: translateX(0);
 	}
 </style>
