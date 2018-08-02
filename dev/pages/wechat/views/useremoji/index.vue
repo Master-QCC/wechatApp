@@ -3,7 +3,7 @@
   	<div class="emojihead">
 			<div class="top">
 				<router-link tag="div" :to="`/useremoji`" class="jxbq tbq">{{jxbq}}</router-link>
-				<router-link tag="div" :to="`/useremoji2`" class="gdbq tbq">{{gdbq}}</router-link>
+				<router-link tag="div" :to="`/useremojitwo`" class="gdbq tbq">{{gdbq}}</router-link>
 			</div>
 			<router-link class="backbtn" tag="div" :to="`/user`">
 				<Icon class="iback" type="chevron-left"></Icon>我
