@@ -1,8 +1,6 @@
 <template>
 	<div>
 		<div class="wchead" :class="ifChangColor? 'unactive' : 'active'">
-			<div class="top">
-			</div>
 			<router-link :to="`${backurl}`">
 			<div class="backbtn" :class="tColor? 'black' : 'white'"><Icon class="iback" :type="iconback"></Icon>{{back}}</div>
 			</router-link>

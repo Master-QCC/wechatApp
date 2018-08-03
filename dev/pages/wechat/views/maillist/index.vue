@@ -138,7 +138,7 @@
 				// this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 				document.documentElement.scrollTop = this.$refs.friendbox[val].offsetTop + 42
 				// console.log(document.documentElement.scrollTop,666)
-			},
+			}, 
 			handleScroll () {
 				this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 				// console.log(this.scrollTop,121212)

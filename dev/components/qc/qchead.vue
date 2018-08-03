@@ -1,8 +1,6 @@
 <template>
 	<div>
 		<div class="qchead">
-			<div class="top">
-			</div>
 			<router-link :to="`${backurl}`">
 			<div class="backbtn"><Icon class="iback" :type="iconback"></Icon>{{back}}</div>
 			</router-link>

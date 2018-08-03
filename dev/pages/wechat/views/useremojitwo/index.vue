@@ -22,15 +22,18 @@
 				</li>
 			</transition-group>
 		</div>
-		<div class="wrapemoji" v-for="(wemoji,key,a) in wemojis" :key="a">
-			<div class="emojitext">{{key}}</div>
-			<div class="emojiitem" ref="item" v-for="(value,b) in wemoji" :key="b">
-				<img :src="value.epic" alt="表情图片">
-				<div class="emojiname">
-					<p class="ename">{{value.name}}</p>
-					<p class="edescribe">{{value.describe}}</p>
+		<div class="emojibox">
+			<div class="emojitext">
+				<p>{{eheadtext1}}</p>
+				<p>{{eheadtext2}}</p><Icon class="icon" type="chevron-right"></Icon>
+			</div>
+			<div class="emojilist">
+				<div class="emojiitem" v-for="(emoji,index) in emojis" :key="index">
+					<div class="emoji">
+						<img :src="emoji.url" alt="表情图片">
+					</div>
+					<p>{{emoji.text}}</p>
 				</div>
-				<button ref="btnbox" @click="btndown(b)" v-text="value.btntext" :class="{changedownload:downed}" type="success" ghost></button>
 			</div>
 		</div>
   </div>
@@ -38,10 +41,9 @@
 
 <script>
 	import {Icon,Input} from 'iview'
-	import list from '@/mockData/emojilist.js'
 	
 	export default{
-		name: 'useremoji',
+		name: 'useremojitwo',
 		components: {
 				Icon,
 	      Input
@@ -50,10 +52,10 @@
 			return{
 				jxbq:"精选表情",
 				gdbq:"更多表情",
-				wemojis:list,
+				eheadtext1:'热门排行',
+				eheadtext2:'新品推荐',
 				mark:0,
 				timer: null,
-				downed:false,
 				pics:[{
 					imgurl:require('@/assets/images/emojibanner1.png')
 				},{
@@ -62,6 +64,79 @@
 					imgurl:require('@/assets/images/emojibanner3.png')
 				},{
 					imgurl:require('@/assets/images/emojibanner4.png')
+				}],
+				emojis:[{
+					url:require('@/assets/images/emojipic1.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic2.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
+				},{
+					url:require('@/assets/images/emojipic5.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic6.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
+				},{
+					url:require('@/assets/images/emojipic1.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic2.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
+				},{
+					url:require('@/assets/images/emojipic5.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic6.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
+				},{
+					url:require('@/assets/images/emojipic1.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic2.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
+				},{
+					url:require('@/assets/images/emojipic5.png'),
+					text:'蜜桃猫5'
+				},{
+					url:require('@/assets/images/emojipic6.png'),
+					text:'建军节快乐'
+				},{
+					url:require('@/assets/images/emojipic3.png'),
+					text:'二果叔'
+				},{
+					url:require('@/assets/images/emojipic4.png'),
+					text:'兔小只3'
 				}]
 			}
 		},
@@ -75,14 +150,6 @@
 			},
 			play(){
 				setInterval(this.autoplay,2500)
-			},
-			btndown(val){
-				console.log(val,111)
-				this.$refs.btnbox[val].style.color = '#ddd'
-				this.$refs.btnbox[val].style.border = '.01rem solid #ddd'
-				this.$refs.btnbox[val].innerText = "已下载"
-				console.log(this.$refs.btnbox[val],222)
-				console.log(this.$refs.btnbox[val].downed,333)
 			}
 		},
 		mounted(){
@@ -121,11 +188,11 @@
 				padding: .05rem .1rem;
 				text-align: center;
 			}
-			.jxbq{
+			.gdbq{
 				background-color: white;
 				color: #49494B;
 			} 
-			.gdbq{
+			.jxbq{
 				color: white;
 				background-color: #49494B;
 			} 
@@ -203,50 +270,6 @@
 		display: block;
 		zoom: 1;
 	}
-	.wrapemoji{
-		padding-left: .1rem;
-		.emojitext{
-			line-height: .5rem;
-			height: .5rem;
-			font-size: .16rem;
-			color: #000;
-			border-bottom: .01rem solid #F2F2F2; 
-		}
-	}
-	.emojiitem{
-		display: flex;
-		padding: .1rem;
-		padding-left: 0;
-		align-items:center;
-		border-bottom: .01rem solid #ddd; 
-		img{
-			width: .7rem;
-			height: .6rem;
-			margin-right: .1rem;
-		}
-		.emojiname{
-			flex: 1;
-			.ename{
-				font-size: .18rem;
-				color: #000;
-			}
-			.edescribe{
-				font-size: .14rem;
-				color: #8A8A8A;
-			}
-		}
-		button{
-			border: .01rem solid #52A936;
-			background-color: white;
-			padding: .02rem .14rem;
-			color: #52A936;
-			border-radius: .04rem;
-		}
-		.changedownload{
-			border: .01rem solid #ddd;
-			color: #ddd;
-		}
-	}
 	.image-enter-active {
 		transform: translateX(0);
 		transition: all 1s ease;
@@ -260,5 +283,42 @@
 	}
 	.image-leave {
 		transform: translateX(0);
+	}
+	.emojibox{
+		padding: .1rem;
+		.emojitext{
+			display: flex;
+			p:first-child{
+				flex: 1;
+				font-size: .16rem;
+				line-height: 100%;
+			}
+			p:last-child{
+				font-size: .12rem;
+				line-height: 100%;
+			}
+			.icon{
+				margin-left:.1rem;
+				line-height: 100%;
+			}
+		}
+		.emojilist{
+			width:100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content:space-around;
+			.emojiitem{
+				width: 29%;
+				padding: .08rem;
+				.emoji{
+					border: .01rem solid #ddd;
+					border-radius: .1rem;
+					padding: .08rem;
+				}
+				p{
+					text-align: center;
+				}
+			}
+		}
 	}
 </style>
