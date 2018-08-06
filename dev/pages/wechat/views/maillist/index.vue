@@ -125,7 +125,7 @@
 					this.$refs.words[26].style.color = "white"
 					this.$refs.words[26].style.backgroundColor = "#52A936"
 				}
-				console.log(this.$refs.words[0],333)
+				// console.log(this.$refs.words[0],333)
 			}
 		},
 		methods:{

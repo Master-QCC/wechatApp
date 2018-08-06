@@ -2,8 +2,8 @@
   <div class="useremoji">
   	<div class="emojihead">
 			<div class="top">
-				<router-link tag="div" :to="`/useremoji`" class="jxbq tbq">{{jxbq}}</router-link>
-				<router-link tag="div" :to="`/useremojitwo`" class="gdbq tbq">{{gdbq}}</router-link>
+				<router-link tag="div" :to="`/useremoji`" class="jxbq tbq">{{etitleone}}</router-link>
+				<router-link tag="div" :to="`/useremojitwo`" class="gdbq tbq">{{etitletwo}}</router-link>
 			</div>
 			<router-link class="backbtn" tag="div" :to="`/user`">
 				<Icon class="iback" type="chevron-left"></Icon>我
@@ -22,15 +22,26 @@
 				</li>
 			</transition-group>
 		</div>
-		<div class="wrapemoji" v-for="(wemoji,key,a) in wemojis" :key="a">
-			<div class="emojitext">{{key}}</div>
-			<div class="emojiitem" ref="item" v-for="(value,b) in wemoji" :key="b">
-				<img :src="value.epic" alt="表情图片">
+		<div class="wrapemoji">
+			<div class="emojitext">{{emojitileone}}</div>
+			<div class="emojiitem" ref="item" v-for="(wjone,a) in wemojione" :key="a">
+				<img :src="wjone.epic" alt="表情图片">
 				<div class="emojiname">
-					<p class="ename">{{value.name}}</p>
-					<p class="edescribe">{{value.describe}}</p>
+					<p class="ename">{{wjone.name}}</p>
+					<p class="edescribe">{{wjone.describe}}</p>
 				</div>
-				<button ref="btnbox" @click="btndown(b)" v-text="value.btntext" :class="{changedownload:downed}" type="success" ghost></button>
+				<button ref="btnbox" @click="btndown(wjone,a)" v-text="wjone.btntext" :class="{changedownload:wjone.downed}" type="success" ghost></button>
+			</div>
+		</div>
+		<div class="wrapemoji">
+			<div class="emojitext">{{emojitiletwo}}</div>
+			<div class="emojiitem" ref="item" v-for="(wjtwo,b) in wemojitwo" :key="b">
+				<img :src="wjtwo.epic" alt="表情图片">
+				<div class="emojiname">
+					<p class="ename">{{wjtwo.name}}</p>
+					<p class="edescribe">{{wjtwo.describe}}</p>
+				</div>
+				<button ref="btnboxtwo" @click="btndowntwo(wjtwo,b)" v-text="wjtwo.btntext" :class="{changedownload:wjtwo.downed}" type="success" ghost></button>
 			</div>
 		</div>
   </div>
@@ -38,7 +49,6 @@
 
 <script>
 	import {Icon,Input} from 'iview'
-	import list from '@/mockData/emojilist.js'
 	
 	export default{
 		name: 'useremoji',
@@ -48,12 +58,12 @@
 	    },
 		data(){
 			return{
-				jxbq:"精选表情",
-				gdbq:"更多表情",
-				wemojis:list,
+				etitleone:"精选表情",
+				etitletwo:"更多表情",
 				mark:0,
 				timer: null,
-				downed:false,
+				emojitileone:'推荐表情',
+				emojitiletwo:'更多精选',
 				pics:[{
 					imgurl:require('@/assets/images/emojibanner1.png')
 				},{
@@ -62,6 +72,96 @@
 					imgurl:require('@/assets/images/emojibanner3.png')
 				},{
 					imgurl:require('@/assets/images/emojibanner4.png')
+				}],
+				wemojione:[{
+					epic: require('@/assets/images/emojipic1.png'),
+					name: "气泡狗日常篇",
+					btntext:'下载',
+					describe:"变得更可爱啦！"
+				},
+				{
+					epic: require('@/assets/images/emojipic2.png'),
+					name: "抱抱情侣篇",
+					btntext:'下载',
+					describe:"抱抱亲亲举举举不动"
+				},
+				{
+					epic: require('@/assets/images/emojipic3.png'),
+					name: "三团",
+					btntext:'下载',
+					describe:"带我回家"
+				}],
+				wemojitwo:[{
+					epic: require('@/assets/images/emojipic4.png'),
+					name: "蘑菇头夏思",
+					btntext:'下载',
+					describe:"让蘑菇头来凉透你的心"
+				},
+				{
+					epic: require('@/assets/images/emojipic5.png'),
+					name: "不二呆第三弹",
+					btntext:'下载',
+					describe:"嘿朋友过来确认下眼神"
+				},
+				{
+					epic: require('@/assets/images/emojipic6.png'),
+					name: "baby猪第二弹",
+					btntext:'下载',
+					describe:"粉嫩的小可爱"
+				},
+				{
+					epic: require('@/assets/images/emojipic2.png'),
+					name: "抱抱情侣篇",
+					btntext:'下载',
+					describe:"抱抱亲亲举举举不动"
+				},
+				{
+					epic: require('@/assets/images/emojipic4.png'),
+					name: "蘑菇头夏思",
+					btntext:'下载',
+					describe:"让蘑菇头来凉透你的心"
+				},
+				{
+					epic: require('@/assets/images/emojipic5.png'),
+					name: "不二呆第三弹",
+					btntext:'下载',
+					describe:"嘿朋友过来确认下眼神"
+				},
+				{
+					epic: require('@/assets/images/emojipic6.png'),
+					name: "baby猪第二弹",
+					btntext:'下载',
+					describe:"粉嫩的小可爱"
+				},
+				{
+					epic: require('@/assets/images/emojipic2.png'),
+					name: "抱抱情侣篇",
+					btntext:'下载',
+					describe:"抱抱亲亲举举举不动"
+				},
+				{
+					epic: require('@/assets/images/emojipic4.png'),
+					name: "蘑菇头夏思",
+					btntext:'下载',
+					describe:"让蘑菇头来凉透你的心"
+				},
+				{
+					epic: require('@/assets/images/emojipic5.png'),
+					name: "不二呆第三弹",
+					btntext:'下载',
+					describe:"嘿朋友过来确认下眼神"
+				},
+				{
+					epic: require('@/assets/images/emojipic6.png'),
+					name: "baby猪第二弹",
+					btntext:'下载',
+					describe:"粉嫩的小可爱"
+				},
+				{
+					epic: require('@/assets/images/emojipic2.png'),
+					name: "抱抱情侣篇",
+					btntext:'下载',
+					describe:"抱抱亲亲举举举不动"
 				}]
 			}
 		},
@@ -76,13 +176,21 @@
 			play(){
 				setInterval(this.autoplay,2500)
 			},
-			btndown(val){
-				console.log(val,111)
-				this.$refs.btnbox[val].style.color = '#ddd'
-				this.$refs.btnbox[val].style.border = '.01rem solid #ddd'
-				this.$refs.btnbox[val].innerText = "已下载"
-				console.log(this.$refs.btnbox[val],222)
-				console.log(this.$refs.btnbox[val].downed,333)
+			btndown(item,index){
+					if(typeof item.downed == 'undefined'){
+					this.$set(item,'downed',true)
+				}else{
+					return item
+				}
+				this.$refs.btnbox[index].innerText = "已下载"
+			},
+			btndowntwo(item,index){
+				if(typeof item.downed == 'undefined'){
+					this.$set(item,'downed',true)
+				}else{
+					return item
+				}
+				this.$refs.btnboxtwo[index].innerText = "已下载"
 			}
 		},
 		mounted(){
