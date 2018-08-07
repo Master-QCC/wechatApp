@@ -3,32 +3,42 @@
   	<Qchead :icontype='it' :wechatmessage='wm'></Qchead>
 		<div ref="fixbox" class="fixedword" :class="display? 'show' : 'hide'">{{fixword}}</div>
   	<div class="search" ref='search'>
-  		<Input class="sinput" icon="mic-a" placeholder="搜索"></Input>
+  		<Input class="sinput" icon="mic-a" v-on:input="searchresult($event)" placeholder="搜索" v-model='searchmessage'></Input>
   	</div>
-  	<div class="wrapcontent">
-	  	<div ref='defaultinfo' class="defaultinfo" v-for="def in defs" :key="def.id">
-			<div class="listbox">
-				<img :src="def.src" alt="图标">
-				<p>{{def.word}}</p>
-			</div>
-		</div>
-		<div ref='friendbox' class="wrapfriend" v-for="(wfriend,key,index) in wfriends" :key="index">
-			<div ref='fnumbox' class="fnum">{{key}}</div>
-			<div v-for="(value,index) in wfriend" :key="index">
-				<div class="friends">
-					<div class="listbox">
-						<img :src="value.fpic" alt="头像">
-						<p>{{value.fname}}</p>
-					</div>	
+		<!-- searchresult-S -->
+		<div ref='searchresultbox' class="searchresult">
+			<div ref='defaultinfo' class="defaultinfo" v-for="search in searchs" :key="search.id">
+				<div class="listbox">
+					<img :src="search.src" alt="图标">
+					<p>{{search.word}}</p>
 				</div>
 			</div>
 		</div>
-		<div class="letterlist">
-			<ul>
-				<li><Icon type="ios-search"></Icon></li>
-				<li ref="words" @click="top(index)" :class="{ green:index == current}" v-for="(letter,index) in letters" :key="index">{{letter.name}}</li>
-			</ul>
-		</div>
+		<!-- searchresult-E -->	
+  	<div class="wrapcontent">
+	  	<div ref='defaultinfo' class="defaultinfo" v-for="def in defs" :key="def.id">
+				<div class="listbox">
+					<img :src="def.src" alt="图标">
+					<p>{{def.word}}</p>
+				</div>
+			</div>
+			<div ref='friendbox' class="wrapfriend" v-for="(wfriend,key,index) in wfriends" :key="index">
+				<div ref='fnumbox' class="fnum">{{key}}</div>
+				<div v-for="(value,index) in wfriend" :key="index">
+					<div class="friends">
+						<div class="listbox">
+							<img :src="value.fpic" alt="头像">
+							<p>{{value.fname}}</p>
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class="letterlist">
+				<ul>
+					<li><Icon type="ios-search"></Icon></li>
+					<li ref="words" @click="top(index)" :class="{ green:index == current}" v-for="(letter,index) in letters" :key="index">{{letter.name}}</li>
+				</ul>
+			</div>
   	</div>
   	<Qcfooter></Qcfooter>
   </div>
@@ -53,10 +63,29 @@
 				wm:'通讯录',
 				it:'person-add',
 				current:-1,
+				searchmessage:'',
 				display:true,
 				wfriends:list,
 				fixword:'',
 				scrollTop: '',
+				searchs:[
+				{
+					src:require('@/assets/images/tx1.jpg'),
+					word:'AAA'
+				},
+				{
+					src:require('@/assets/images/tx2.jpg'),
+					word:'BBB'
+				},
+				{
+					src:require('@/assets/images/tx1.jpg'),
+					word:'CCC'
+				},
+				{
+					src:require('@/assets/images/tx2.jpg'),
+					word:'DDD'
+				}
+				],
 				defs:[
 				{
 					src:require('@/assets/images/default-icon1.png'),
@@ -143,6 +172,14 @@
 				this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 				// console.log(this.scrollTop,121212)
 			},
+			searchresult(e){
+				if(e == ''||this.searchmessage == ''){
+					this.$refs.searchresultbox.style.display = "none"
+					return this.searchmessage
+				}else{
+					this.$refs.searchresultbox.style.display = "block"
+				}
+			}
 		},
 		mounted() {
 			window.addEventListener('scroll', this.handleScroll)
@@ -252,5 +289,15 @@
 	}
 	.hide{
 		display: none;
+	}
+	.searchresult{
+		display: none;
+		min-height: 100vh;
+		width: 100%;
+		background-color: white;
+		z-index: 10;
+		position: relative;
+    top: 0.8rem;
+    margin-bottom: 0.66rem;
 	}
 </style>
