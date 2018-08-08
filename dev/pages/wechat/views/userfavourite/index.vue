@@ -68,22 +68,22 @@
 					evurl:require('@/assets/images/favpic.png'),
 					title:'让广东人早起排队的店，来了',
 					username:'圣光围绕的QCC',
-					time:'2018/07/24'
+					time:'2018/08/08'
 				},{
 					evurl:require('@/assets/images/favpic2.png'),
 					title:'vue.js使用中踩过的坑',
 					username:'web学习圈',
-					time:'2018/07/24'
+					time:'2018/08/07'
 				},{
 					evurl:require('@/assets/images/favpic.png'),
 					title:'让广东人早起排队的店，来了',
 					username:'圣光围绕的QCC',
-					time:'2018/07/23'
+					time:'2018/08/07'
 				},{
 					evurl:require('@/assets/images/favpic2.png'),
 					title:'vue.js使用中踩过的坑',
 					username:'web学习圈',
-					time:'2018/07/22'
+					time:'2018/08/06'
 				},{
 					evurl:require('@/assets/images/favpic.png'),
 					title:'让广东人早起排队的店，来了',
@@ -230,6 +230,7 @@
 		.titlebox{
 			float: left;
 			height: .5rem;
+			width: 2.2rem;
 			.eventtitle{
 				font-weight: bold;
 				margin-bottom: .08rem;

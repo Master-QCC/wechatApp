@@ -7,7 +7,7 @@
   	</div>
 		<!-- searchresult-S -->
 		<div ref='searchresultbox' class="searchresult">
-			<div ref='defaultinfo' class="defaultinfo" v-for="search in searchs" :key="search.id">
+			<div ref='defaultinfo' class="defaultinfo" v-for="search in searchbox" :key="search.id">
 				<div class="listbox">
 					<img :src="search.src" alt="图标">
 					<p>{{search.word}}</p>
@@ -49,6 +49,7 @@
 	import Qcfooter from '@/components/qc/qcfooter'
 	import Qchead from '@/components/qc/qchead'
 	import list from '@/mockData/maillist.js'
+	import searchlist from '@/mockData/searchlist.js'
 
 	export default{
 		name: 'maillist',
@@ -68,24 +69,7 @@
 				wfriends:list,
 				fixword:'',
 				scrollTop: '',
-				searchs:[
-				{
-					src:require('@/assets/images/tx1.jpg'),
-					word:'AAA'
-				},
-				{
-					src:require('@/assets/images/tx2.jpg'),
-					word:'BBB'
-				},
-				{
-					src:require('@/assets/images/tx1.jpg'),
-					word:'CCC'
-				},
-				{
-					src:require('@/assets/images/tx2.jpg'),
-					word:'DDD'
-				}
-				],
+				searchs:searchlist,
 				defs:[
 				{
 					src:require('@/assets/images/default-icon1.png'),
@@ -157,7 +141,20 @@
 				// console.log(this.$refs.words[0],333)
 			}
 		},
-		methods:{
+		computed: {
+			searchbox(){
+				var searchmessage = this.searchmessage;
+				if(searchmessage){
+					return this.searchs.filter(function (searchs){
+						return Object.keys(searchs).some(function (key){
+							return String(searchs[key]).toUpperCase().indexOf(searchmessage.toUpperCase()) > -1
+						})
+					})
+				}
+				return this.searchs;
+			}
+		},
+		methods: {
 			top(val){
 				for(let i = 1;i<26;i++){
 						this.$refs.words[i].style.color = "#495060"

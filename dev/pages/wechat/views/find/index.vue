@@ -4,7 +4,7 @@
     <div class="wrapcontent">
 			<div class="userinfo" v-for="(item,index) in items" :key="index">
 				<div class="listbox">
-					<Icon class="icon" :type="item.icon"></Icon>
+					<Icon class="icon iconleft" :type="item.icon"></Icon>
 					<p>{{item.word}}</p>
 					<Icon class="icon icon2" type="ios-arrow-forward"></Icon>
 					<p class="wordr">{{item.wordr}}</p>
@@ -123,5 +123,21 @@
 		padding: 0.1rem;
 		margin-top: 0.2rem;
 		text-align: center;
+	}
+	.userinfo:nth-child(3){
+		.listbox{
+			.iconleft{
+				zoom:1.9;
+				padding-left: 2px;
+			}
+		}
+	}
+	.userinfo:nth-child(6){
+		.listbox{
+			.iconleft{
+				padding-left: 2px;
+				zoom:1.7;
+			}
+		}
 	}
 </style>
