@@ -7,7 +7,7 @@
   	</div>
 		<!-- searchresult-S -->
 		<div ref='searchresultbox' class="searchresult">
-			<div ref='defaultinfo' class="defaultinfo" v-for="search in searchbox" :key="search.id">
+			<div class="defaultinfo" v-for="search in searchbox" :key="search.id">
 				<div class="listbox">
 					<img :src="search.src" alt="图标">
 					<p>{{search.word}}</p>
@@ -104,6 +104,7 @@
 				return value
 			},
 			scrollTop: function(newValue,oldValue) {
+				let length = this.letters.length-1
 				if(newValue < this.$refs.friendbox[0].offsetTop + 42) {
 					this.$refs.fixbox.display = false
 					this.fixword = ""
@@ -118,7 +119,7 @@
 					this.$refs.words[1].style.color = "#495060"
 						this.$refs.words[1].style.backgroundColor = "transparent"
 				}
-				for(let i = 1;i<26;i++){
+				for(let i = 1;i<length;i++){
 					if(newValue >= this.$refs.friendbox[i].offsetTop + 42 && newValue < this.$refs.friendbox[i].offsetTop + 42 + this.$refs.friendbox[i].offsetHeight) {
 						this.$refs.fixbox.display = true
 						this.fixword = this.$refs.fnumbox[i].innerText
@@ -130,13 +131,13 @@
 						this.$refs.words[i].style.backgroundColor = "#52A936"
 					}
 				}
-				if(newValue >= this.$refs.friendbox[26].offsetTop + 42 && newValue < this.$refs.friendbox[26].offsetTop + 42 + this.$refs.friendbox[26].offsetHeight) {
+				if(newValue >= this.$refs.friendbox[length].offsetTop + 42 && newValue < this.$refs.friendbox[length].offsetTop + 42 + this.$refs.friendbox[length].offsetHeight) {
 					this.$refs.fixbox.display = true
-					this.fixword = this.$refs.fnumbox[26].innerText
-					this.$refs.words[25].style.color = "#495060"
-					this.$refs.words[25].style.backgroundColor = "transparent"
-					this.$refs.words[26].style.color = "white"
-					this.$refs.words[26].style.backgroundColor = "#52A936"
+					this.fixword = this.$refs.fnumbox[length].innerText
+					this.$refs.words[length-1].style.color = "#495060"
+					this.$refs.words[length-1].style.backgroundColor = "transparent"
+					this.$refs.words[length].style.color = "white"
+					this.$refs.words[length].style.backgroundColor = "#52A936"
 				}
 				// console.log(this.$refs.words[0],333)
 			}
@@ -146,9 +147,7 @@
 				var searchmessage = this.searchmessage;
 				if(searchmessage){
 					return this.searchs.filter(function (searchs){
-						return Object.keys(searchs).some(function (key){
-							return String(searchs[key]).toUpperCase().indexOf(searchmessage.toUpperCase()) > -1
-						})
+						return String(searchs['word']).toUpperCase().indexOf(searchmessage.toUpperCase()) > -1
 					})
 				}
 				return this.searchs;
@@ -156,12 +155,12 @@
 		},
 		methods: {
 			top(val){
-				for(let i = 1;i<26;i++){
+				let length = this.letters.length-1
+				for(let i = 1;i<length;i++){
 						this.$refs.words[i].style.color = "#495060"
 						this.$refs.words[i].style.backgroundColor = "transparent"
 				}
-				this.current = val
-				// this.scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+				this.current = val,
 				document.documentElement.scrollTop = this.$refs.friendbox[val].offsetTop + 42
 				// console.log(document.documentElement.scrollTop,666)
 			}, 
